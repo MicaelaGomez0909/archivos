@@ -1,0 +1,45 @@
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+
+/*string texto;
+
+Console.WriteLine("Ingrese texto");
+texto= Console.ReadLine();
+File.WriteAllText("Archivo.txt", texto);
+
+string texto;
+string ruta = "D://texto.txt";
+Console.WriteLine("Ingrese texto");
+texto = Console.ReadLine();
+File.WriteAllText(ruta, texto);
+
+
+string cargado=File.ReadAllText(ruta);
+Console.WriteLine(" \nContenido del archivo=  "+ cargado);*/
+
+// crea clase, la convierte en string y guarda en un archivo
+
+persona persona1 = new persona("Micaela", "Gomez", 21);
+var json=JsonSerializer.Serialize(persona1);
+Console.WriteLine(json);
+string ruta = "D://texto.txt";
+File.WriteAllText(ruta, json);
+string carga =  File.ReadAllText(ruta);
+persona person = JsonSerializer.Deserialize<persona>(carga);
+
+
+class persona
+{
+   
+    public string nombre { get; set; }
+    public string apellido { get; set; }
+    public int edad { get; set; }
+
+
+    public persona( string nombre, string apellido, int edad)
+    {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
+}
